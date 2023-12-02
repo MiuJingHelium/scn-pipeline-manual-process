@@ -14,5 +14,6 @@ for SRR in $(ls outs/align/);do
 	mkdir -p outs/R_outs/markers/
 	Rscript R_scripts/markers.R outs/R_outs/seurat_objects/${SRR}_seurat.rds $SRR outs/R_outs/
 done	
-	
+mkdir -p outs/R_outs/merged/
+Rscript R_scripts/merge.R outs/R_outs/seurat_objects/ outs/R_outs/merged/
 
