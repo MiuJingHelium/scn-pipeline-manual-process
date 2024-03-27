@@ -13,12 +13,12 @@ mkdir -p $OUTDIR
 # and avoid repetitively generating it.
 
 #chmod +x ./generate_index.sh
-chmod +x ./scripts/align_task.sh
+chmod +x ./scripts/align_task_makeup.sh
 chmod +x ./scripts/gzip_outs.sh
 #JOBID=$(./generate_index.sh $WD $REF_FASTA $REF_GTF $INDEX_DIR | awk '{print $2}' | tr -d '<>') 
 array=("GSM6841144" "GSM6841146" "GSM6841150" "GSM6841151")
 for SAMPLE in ${array[@]};do
-	JOBID=$(./scripts/align_task.sh $WD $INDIR $OUTDIR $SAMPLE $INDEX_DIR | awk '{print $2}' | tr -d '<>') #$JOBID
+	JOBID=$(./scripts/align_task_makeup.sh $WD $INDIR $OUTDIR $SAMPLE $INDEX_DIR | awk '{print $2}' | tr -d '<>') #$JOBID
 	./scripts/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID
 	
 done
