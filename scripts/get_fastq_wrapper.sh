@@ -2,6 +2,7 @@ WD=$1
 GSM_ACC_list=$2
 INDIR=$WD/info/
 cd $WD
+chmod +x scripts/get_fastq_conda.sh
 mkdir -p fastq/
 while read GSM
 do
