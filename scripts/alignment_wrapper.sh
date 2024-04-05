@@ -5,7 +5,9 @@ INDIR=$2 #absolute path to list of directories named by samples;typically named 
 OUTDIR=$3 #typically outs/align/
 #REF_FASTA='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-cellranger-mm10-3.0.0/fasta/genome.fa'
 #REF_GTF='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-gex-mm10-2020-A/genes/genes.gtf'
-INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/STAR_2.7.10b/'
+# INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/STAR_2.7.10b/'
+INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/STAR_2.7.10b/'
+
 cd $WD
 mkdir -p $OUTDIR
 # The index should have been generated inside the storage

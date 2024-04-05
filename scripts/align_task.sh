@@ -43,11 +43,11 @@ LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
         -J ${GSM}_align -n 8 -M 64GB -o ${GSM}_align.out \
 	-e ${GSM}_align.err -R 'select[mem>64MB] rusage[mem=64GB] span[hosts=1]' \
         -a "docker(kalisaz/starsolo:2.7.10b)" STAR --genomeDir $INDEX_DIR \
-        --readFilesIn  $R_3 $R_2 \
+        --readFilesIn  $R_2 $R_1 \
   	--clipAdapterType CellRanger4 --outFilterScoreMin 30 \
   	--soloCBmatchWLtype 1MM_multi_Nbase_pseudocounts --soloUMIfiltering MultiGeneUMI_CR --soloUMIdedup 1MM_CR \
   	--soloCBlen 16 \
-  	--soloUMIlen 12 \
+  	--soloUMIlen 10 \
   	--soloBarcodeReadLength 0 \
   	--soloType CB_UMI_Simple \
   	--soloCBwhitelist $WHITELIST \

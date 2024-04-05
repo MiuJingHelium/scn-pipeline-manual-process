@@ -13,11 +13,11 @@ SRR_ACC=$3
 #mkdir -p ./fastq/
 cd $WD
 
-
+chmod +x scripts/get_file.sh
 LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
         -n 4 -o get_fastq_conda.out \
-        -e get_fastq_conda.err -R 'rusage[mem=64GB] span[hosts=1]' \
-	-J get_fastq_conda -M 64GB \
+        -e get_fastq_conda.err -R 'rusage[mem=32GB] span[hosts=1]' \
+	-J get_fastq_conda -M 32GB \
         -g /carisa/sra \
 	-a "docker(continuumio/miniconda3)"  \
 	/bin/bash -c \

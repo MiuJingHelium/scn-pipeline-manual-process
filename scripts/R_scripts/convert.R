@@ -13,7 +13,7 @@ description_file.path <- args[5]
 link <- args[6]
 
 title <- ""
-description <- read.delim(description_file.path, header=F)
+description <- read.delim(description_file.path,header=F)
 
 token <- args[7]
 species <- args[8]
@@ -51,7 +51,7 @@ for (markers_file in markers_files) {
 }
 
 out_dir <- paste0("outs/scn/",token)
-
+print(paste(species,title,description,link,token,sep = ";"))
 migrateSeuratObject(seurat,
                     species=species,
                     name=title,
