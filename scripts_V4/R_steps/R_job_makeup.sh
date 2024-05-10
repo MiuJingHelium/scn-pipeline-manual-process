@@ -16,4 +16,4 @@ LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
         -J R_makeup -n 8 -M 64GB -o R_makeup.out \
 	-e R_makeup.err -R 'select[mem>64MB] rusage[mem=64GB] span[hosts=1]' \
         -a "docker(kalisaz/scrna-extra:r4.3.0)" /bin/bash -c \
-	"Rscript scripts/R_scripts/convert.R $LEVEL $PATTERN $DATASET $SAMPLE $DESC $LINK $TOKEN $SPEC"
+	"Rscript scripts/R_steps/R_scripts/convert.R $LEVEL $PATTERN $DATASET $SAMPLE $DESC $LINK $TOKEN $SPEC"

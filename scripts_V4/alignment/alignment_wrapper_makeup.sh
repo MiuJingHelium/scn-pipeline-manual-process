@@ -3,6 +3,8 @@
 WD=$1
 INDIR=$2 #absolute path to list of directories named by samples;typically named as fastq/
 OUTDIR=$3 #typically outs/align/
+MODE=$4
+
 #REF_FASTA='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-cellranger-mm10-3.0.0/fasta/genome.fa'
 #REF_GTF='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-gex-mm10-2020-A/genes/genes.gtf'
 #INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/STAR_2.7.10b/'
@@ -15,12 +17,27 @@ mkdir -p $OUTDIR
 # and avoid repetitively generating it.
 
 #chmod +x ./generate_index.sh
-chmod +x ./scripts/align_task_makeup.sh
-chmod +x ./scripts/gzip_outs.sh
+chmod +x ./scripts/alignment/lign_task_makeup.sh
+chmod +x ./scripts/alignment/align_task_cellranger.sh
+chmod +x ./scripts/alignment/gzip_outs.sh
 #JOBID=$(./generate_index.sh $WD $REF_FASTA $REF_GTF $INDEX_DIR | awk '{print $2}' | tr -d '<>') 
-array=("GSM5957725" "GSM5957729" "GSM5957736" "GSM5957737")
-for SAMPLE in ${array[@]};do
-	JOBID=$(./scripts/align_task_makeup.sh $WD $INDIR $OUTDIR $SAMPLE $INDEX_DIR | awk '{print $2}' | tr -d '<>') #$JOBID
-	./scripts/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID
+array=("GSM7041003" "GSM7041006" "GSM7041007")
+
+case "$MODE" in 
+	"cellranger")
+		./scripts/preparation/rename_fastq.sh $WD
+		for SAMPLE in ${array[@]};do
+		JOBID=$(./scripts/alignment/align_task_cellranger_makeup.sh $WD $INDIR $OUTDIR $SAMPLE $INDEX_DIR | awk '{print $2}' | tr -d '<>') #$JOBID
+		#./scripts/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID
 	
-done
+	done
+	;;
+	"star")
+		mkdir -p $OUTDIR
+		for SAMPLE in ${array[@]};do
+			JOBID=$(./scripts/alignment/align_task_makeup.sh $WD $INDIR $OUTDIR $SAMPLE $INDEX_DIR | awk '{print $2}' | tr -d '<>') #$JOBID
+			./scripts/alignment/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID
+	
+		done
+	;;
+esac	
