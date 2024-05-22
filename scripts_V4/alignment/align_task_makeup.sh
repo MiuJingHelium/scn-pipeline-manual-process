@@ -6,12 +6,24 @@ WD=$1
 INDIR=$2
 OUTDIR=$3
 GSM=$4
-INDEX_DIR=$5
-WHITELIST_V3="/storage1/fs1/martyomov/Active/IndividualBackUps/carisa/CellRanger_barcodes/barcodes/3M-february-2018.txt" #v3 barcode
-WHITELIST_V2="/storage1/fs1/martyomov/Active/IndividualBackUps/carisa/CellRanger_barcodes/barcodes/737K-august-2016.txt" #3' V2
+GENOME=$5
+WHITELIST=$6
+
+
 export LSF_DOCKER_VOLUMES="/storage1/fs1/martyomov/Active/:/storage1/fs1/martyomov/Active/  /scratch1/fs1/martyomov:/scratch1/fs1/martyomov /home/carisa:/home/carisa"
 cd $WD
 mkdir -p $OUTDIR/$GSM
+
+case "$GENOME" in
+	"hs")
+		INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/STAR_2.7.10b/'
+	;;
+	"mm")
+		INDEX_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/STAR_2.7.10b/'
+	;;
+esac
+
+
 #JOBID=$6
 #ASSUME 10X
 #If v2: soloCBlen=16; v3: soloCBlen=16
@@ -52,7 +64,7 @@ LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
   	--soloUMIlen 10 \
   	--soloBarcodeReadLength 0 \
   	--soloType CB_UMI_Simple \
-  	--soloCBwhitelist $WHITELIST_V2 \
+  	--soloCBwhitelist $WHITELIST \
   	--outFileNamePrefix "$OUTDIR/$GSM/" \
   	--runThreadN 8 \
   	--readFilesCommand zcat \

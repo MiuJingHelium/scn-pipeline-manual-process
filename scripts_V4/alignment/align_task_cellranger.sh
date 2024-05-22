@@ -6,11 +6,20 @@ WD=$1
 INDIR=$2
 OUTDIR=$3
 GSM=$4
-export LSF_DOCKER_VOLUMES="/storage1/fs1/martyomov/Active/:/storage1/fs1/martyomov/Active/  /scratch1/fs1/martyomov:/scratch1/fs1/martyomov /home/carisa:/home/carisa"
+GENOME=$5
+export LSF_DOCKER_VOLUMES="/storage1/fs1/martyomov/Active/:/storage1/fs1/martyomov/Active/  /scratch1/fs1/martyomov:/scratch1/fs1/martyomov /home/carisa:/home/carisa" 
 
-#REF_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-cellranger-mm10-3.0.0/' 
-REF_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/refdata-cellranger-GRCh38-3.0.0/'
 WHITELIST="/storage1/fs1/martyomov/Active/IndividualBackUps/carisa/CellRanger_barcodes/barcodes/3M-february-2018.txt"
+
+case "$GENOME" in
+	"hs")
+		REF_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Human/refdata-cellranger-GRCh38-3.0.0/'
+	;;
+	"mm")
+		REF_DIR='/storage1/fs1/martyomov/Active/References/10X/SC/Mouse/refdata-cellranger-mm10-3.0.0/'
+	;;
+esac
+
 
 cd $WD
 mkdir -p $OUTDIR/$GSM

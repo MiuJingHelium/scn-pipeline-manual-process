@@ -12,7 +12,7 @@ chmod +x scripts/R_steps/R_merge_wrapper.sh
 
 LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
         -J R_merge -n 8 -M 48GB -o R_merge.out \
-	-w $JOBID \
-	-e R_merge.err -R 'select[mem>64MB] rusage[mem=64GB] span[hosts=1]' \
+		-w $JOBID \
+		-e R_merge.err -R 'select[mem>64MB] rusage[mem=64GB] span[hosts=1]' \
         -a "docker(kalisaz/scrna-extra:r4.3.0)" /bin/bash -c \
 	"scripts/R_steps/R_merge_wrapper.sh `pwd` $DATASET"
