@@ -40,7 +40,7 @@ done
 
 case "$MODE" in 
 	"cellranger")
-		./scripts/preparation/rename_fastq.sh $WD
+		# ./scripts/preparation/rename_fastq.sh $WD
 		for SAMPLE in ${array[@]};do
 		JOBID=$(./scripts/alignment/align_task_cellranger_makeup.sh $WD $INDIR $OUTDIR $SAMPLE $GENOME | awk '{print $2}' | tr -d '<>') #$JOBID
 		#./scripts/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID

@@ -24,11 +24,11 @@ cd $WD
 chmod +x ./scripts/alignment/align_task.sh
 chmod +x ./scripts/alignment/align_task_cellranger.sh
 chmod +x ./scripts/alignment/gzip_outs.sh
-chmod +x ./scripts/preparation/rename_fastq.sh
+# chmod +x ./scripts/preparation/rename_fastq.sh 
 #JOBID=$(./generate_index.sh $WD $REF_FASTA $REF_GTF $INDEX_DIR | awk '{print $2}' | tr -d '<>') 
 case "$MODE" in 
 	"cellranger")
-		./scripts/preparation/rename_fastq.sh $WD
+		# ./scripts/preparation/rename_fastq.sh $WD
 		for SAMPLE in $(ls $INDIR);do
 		JOBID=$(./scripts/alignment/align_task_cellranger.sh $WD $INDIR $OUTDIR $SAMPLE $GENOME | awk '{print $2}' | tr -d '<>') #$JOBID
 		#./scripts/gzip_outs.sh $WD $OUTDIR $SAMPLE $JOBID

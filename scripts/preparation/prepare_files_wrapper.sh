@@ -11,3 +11,5 @@ chmod +x scriptspreparation/get_fastq_wrapper.sh
 
 $WD/scripts/preparation/parse_accession.sh $WD $META $GSM_ACC
 $WD/scripts/preparation/get_fastq_wrapper.sh $WD $GSM_ACC
+
+# modidication: add additional step --> rename_files.sh
