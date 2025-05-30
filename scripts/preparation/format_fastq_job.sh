@@ -15,4 +15,4 @@ LSF_DOCKER_PRESERVE_ENVIRONMENT=false bsub -q martyomov -G compute-martyomov \
         -g /carisa/sra \
 	-a "docker(continuumio/miniconda3)"  \
 	/bin/bash -c \
-	"conda init; source activate reformat-geo ; $WD/scripts/preparation/format_fastq.py $SRR_ACC $WD/fastq/$GSM_ACC/ $WHITELIST" 
+	"conda init; source activate /storage1/fs1/martyomov/Active/IndividualBackUps/carisa/conda/envs/reformat-geo ; $WD/scripts/preparation/format_fastq.py $SRR_ACC $WD/fastq/$GSM_ACC/ $WHITELIST" 
